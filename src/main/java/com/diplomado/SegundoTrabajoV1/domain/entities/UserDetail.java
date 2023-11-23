@@ -33,7 +33,7 @@ public class UserDetail {
     @Column(name = "birth_day")
     private LocalDate birthDay;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id",
                 nullable = false)
     private User user;
