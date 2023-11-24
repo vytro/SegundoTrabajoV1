@@ -5,7 +5,8 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "user")
+//@Table(name = "user")
+@Table(name = "\"user\"")
 public class User {
 
     @Id
@@ -32,6 +33,11 @@ public class User {
             name = "created_at",
             columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
+
+    @OneToOne(mappedBy = "user",
+              cascade = CascadeType.ALL,
+              fetch = FetchType.EAGER)
+    private UserDetail userDetail;
 
     public User() {
     }
@@ -82,6 +88,10 @@ public class User {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+//    public UserDetail getUserDetail() {
+//        return userDetail;
+//    }
 
     @Override
     public String toString() {
