@@ -1,5 +1,6 @@
 package com.diplomado.SegundoTrabajoV1.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -20,12 +21,14 @@ public class UserDetail {
     private Long id;
 
 
-    @Column(name = "first_name",
-            nullable = false)
+//    @Column(name = "first_name",
+//            nullable = false)
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name",
-            nullable = false)
+//    @Column(name = "last_name",
+//            nullable = false)
+    @Column(name = "last_name")
     private String lastName;
 
     private Integer age;
@@ -89,6 +92,7 @@ public class UserDetail {
         this.birthDay = birthDay;
     }
 
+    @JsonBackReference
     public User getUser() {
         return user;
     }

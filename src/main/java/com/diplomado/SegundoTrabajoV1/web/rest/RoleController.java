@@ -1,6 +1,7 @@
 package com.diplomado.SegundoTrabajoV1.web.rest;
 
 import com.diplomado.SegundoTrabajoV1.domain.entities.Role;
+import com.diplomado.SegundoTrabajoV1.domain.entities.UserRole;
 import com.diplomado.SegundoTrabajoV1.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,4 +47,16 @@ public class RoleController {
         roleService.deleteRole(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/{roleId}/users")
+    public ResponseEntity<List<UserRole>> getUsersWithRole(@PathVariable Long roleId) {
+        return ResponseEntity.ok().body(roleService.getUsersWithRole(roleId));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<UserRole>> getAllUserRoles() {
+        return ResponseEntity.ok().body(roleService.getAllUserRoles());
+    }
+
+
 }

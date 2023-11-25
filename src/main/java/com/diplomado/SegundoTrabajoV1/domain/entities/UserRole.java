@@ -33,7 +33,7 @@ public class UserRole {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(
-            name="role_id",
+            name="rol_id",
             nullable=false)
     private Role role;
 

@@ -3,6 +3,7 @@ package com.diplomado.SegundoTrabajoV1.services.implement;
 import com.diplomado.SegundoTrabajoV1.domain.entities.User;
 import com.diplomado.SegundoTrabajoV1.repositories.UserRepository;
 import com.diplomado.SegundoTrabajoV1.services.UserService;
+import com.diplomado.SegundoTrabajoV1.web.rest.exceptions.UserIdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,11 +40,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(Long id, User userDetails) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found for id: " + id));
+                .orElseThrow(() -> new UserIdNotFoundException(id));
         user.setUsername(userDetails.getUsername());
         user.setPassword(userDetails.getPassword());
         user.setEmail(userDetails.getEmail());
-        // Update more here if
         return userRepository.save(user);
     }
 
