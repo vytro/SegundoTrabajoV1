@@ -1,7 +1,9 @@
 package com.diplomado.SegundoTrabajoV1.services.implement;
 
 import com.diplomado.SegundoTrabajoV1.domain.entities.Role;
+import com.diplomado.SegundoTrabajoV1.domain.entities.UserRole;
 import com.diplomado.SegundoTrabajoV1.repositories.RoleRepository;
+import com.diplomado.SegundoTrabajoV1.repositories.UserRoleRepository;
 import com.diplomado.SegundoTrabajoV1.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +16,12 @@ public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
 
+    private final UserRoleRepository userRoleRepository;
+
     @Autowired
-    public RoleServiceImpl(RoleRepository roleRepository) {
+    public RoleServiceImpl(RoleRepository roleRepository, UserRoleRepository userRoleRepository) {
         this.roleRepository = roleRepository;
+        this.userRoleRepository = userRoleRepository;
     }
 
     @Override
@@ -45,5 +50,15 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void deleteRole(Long id) {
         roleRepository.deleteById(id);
+    }
+
+    @Override
+    public List<UserRole> getUsersWithRole(Long roleId) {
+        return userRoleRepository.findAllByRole_IdOrderById(roleId);
+    }
+
+    @Override
+    public List<UserRole> getAllUserRoles() {
+        return userRoleRepository.findAll();
     }
 }
