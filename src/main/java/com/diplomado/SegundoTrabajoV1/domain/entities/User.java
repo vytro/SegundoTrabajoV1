@@ -1,5 +1,6 @@
 package com.diplomado.SegundoTrabajoV1.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -36,6 +37,7 @@ public class User {
 
     @OneToOne(mappedBy = "user",
               cascade = CascadeType.ALL,
+              orphanRemoval = true,
               fetch = FetchType.EAGER)
     private UserDetail userDetail;
 
@@ -102,5 +104,21 @@ public class User {
                 ", email='" + email + '\'' +
                 ", createdAt=" + createdAt +
                 '}';
+    }
+
+    public void setUserDetail(UserDetail userDetail) {
+        if (userDetail == null) {
+            if (this.userDetail != null) {
+                this.userDetail.setUser(null);
+            }
+        } else {
+            userDetail.setUser(this);
+        }
+        this.userDetail = userDetail;
+    }
+
+    @JsonManagedReference
+    public UserDetail getUserDetail() {
+        return userDetail;
     }
 }

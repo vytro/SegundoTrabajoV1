@@ -5,6 +5,7 @@ import com.diplomado.SegundoTrabajoV1.domain.entities.UserRole;
 import com.diplomado.SegundoTrabajoV1.repositories.RoleRepository;
 import com.diplomado.SegundoTrabajoV1.repositories.UserRoleRepository;
 import com.diplomado.SegundoTrabajoV1.services.RoleService;
+import com.diplomado.SegundoTrabajoV1.web.rest.exceptions.UserIdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role updateRole(Long id, Role roleDetails) {
         Role role = roleRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Role not found for id: " + id));
+                .orElseThrow(() -> new UserIdNotFoundException(id));
         role.setName(roleDetails.getName());
         return roleRepository.save(role);
     }
