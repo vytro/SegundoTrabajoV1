@@ -3,7 +3,8 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/usersdb
+#    url: jdbc:postgresql://localhost:5432/dev_test
+    url: jdbc:postgresql://localhost:5432/dev_usersdb
     username: postgres
     password: 1234
   jpa:
@@ -13,4 +14,6 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         ddl-auto: update
   flyway:
-    locations: classpath:db/migration,classpath:dev/db/migration
+    locations: classpath:db/migration, classpath:dev/db/migration
+#  application:
+#    name:
